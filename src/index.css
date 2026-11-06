@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+body { font-family: "Manrope", sans-serif; background: #F3EAD7; color: #0B3D2E; overflow-x: hidden; }
+h1, h2, h3, .font-display { font-family: "Cormorant Garamond", serif; letter-spacing: -0.01em; }
+h2.font-display { line-height: 1.05; }
+.bg-white { background-color: #FBF6EA; }
+.text-slate-500 { color: #5E6B60; }
+.text-slate-600 { color: #4A5A4D; }
+::selection { background: #0E8A5B; color: #FBF6EA; }
+:focus-visible { outline: 2px solid #D4AF37; outline-offset: 3px; }
+
+/* grain over everything for a printed-paper feel */
+body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 200; opacity: .05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* gold shine sweep on primary buttons */
+.shine { position: relative; overflow: hidden; }
+.shine::after { content: ""; position: absolute; top: 0; left: -80%; width: 50%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent); transform: skewX(-20deg); animation: shine 3.2s ease-in-out infinite; }
+@keyframes shine { 0%, 55% { left: -80%; } 100% { left: 160%; } }
+
+/* section heading ornament: a small gate arch, echoing the logo */
+.eyebrow { display: inline-flex; align-items: center; gap: .6rem; color: #B8921F; font-weight: 700; font-size: .78rem; letter-spacing: .14em; margin-bottom: .6rem; }
+.eyebrow::before { content: ""; width: 22px; height: 12px; border: 1.5px solid #D4AF37; border-bottom: 0; border-radius: 12px 12px 0 0; }
+
+/* marquee */
+.marquee { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+.marquee:hover { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* gold ring that spins around the splash logo */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* off-screen reveal offsets must never widen the page on phones */
+html, body, #root { overflow-x: clip; max-width: 100%; }
+
+section[id] { scroll-margin-top: 92px; }
